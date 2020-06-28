@@ -84,10 +84,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Weather Forecast" id="tdX-Tq-zKA">
-                        <barButtonItem key="leftBarButtonItem" title="Objective-C code" id="fLs-Z1-AjM"/>
+                        <barButtonItem key="leftBarButtonItem" title="Objective-C code" id="fLs-Z1-AjM">
+                            <connections>
+                                <segue destination="eLd-Wh-LI3" kind="show" id="63c-vu-E6f"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="chh-Lg-JWo">
                             <connections>
-                                <segue destination="2Xw-Wi-aEL" kind="presentation" id="TMl-xQ-Iu0"/>
+                                <segue destination="2Xw-Wi-aEL" kind="presentation" identifier="AddCities" id="TMl-xQ-Iu0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -184,6 +188,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k6f-8C-0Q2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1550.7246376811595" y="60.326086956521742"/>
+        </scene>
+        <!--Current City-->
+        <scene sceneID="J0x-V1-ED3">
+            <objects>
+                <viewController id="eLd-Wh-LI3" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H27-6b-9Er">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yU-aG-g6Y">
+                                <rect key="frame" x="20" y="368" width="374" height="50"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" red="0.20265525579999999" green="0.59116286039999999" blue="0.85301119089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4i-eT-ihg">
+                                <rect key="frame" x="86.666666666666686" y="438" width="241" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Display Weather Forecast"/>
+                                <connections>
+                                    <action selector="getWeatherData:" destination="eLd-Wh-LI3" eventType="touchUpInside" id="0NJ-y9-5i4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4yU-aG-g6Y" firstAttribute="leading" secondItem="CwP-60-rQx" secondAttribute="leading" constant="20" id="2qD-iK-Nov"/>
+                            <constraint firstItem="4yU-aG-g6Y" firstAttribute="height" secondItem="H27-6b-9Er" secondAttribute="height" multiplier="0.5" constant="-318" id="4Af-YI-Miu"/>
+                            <constraint firstItem="4yU-aG-g6Y" firstAttribute="centerY" secondItem="H27-6b-9Er" secondAttribute="centerY" constant="25" id="BPu-Zg-a25"/>
+                            <constraint firstItem="K4i-eT-ihg" firstAttribute="top" secondItem="4yU-aG-g6Y" secondAttribute="bottom" constant="20" id="SjL-5z-lli"/>
+                            <constraint firstItem="K4i-eT-ihg" firstAttribute="centerX" secondItem="H27-6b-9Er" secondAttribute="centerX" id="aAr-xk-gOt"/>
+                            <constraint firstItem="CwP-60-rQx" firstAttribute="trailing" secondItem="4yU-aG-g6Y" secondAttribute="trailing" constant="20" id="zfC-9m-JGg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CwP-60-rQx"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Current City" id="pqc-qK-AS1"/>
+                    <connections>
+                        <outlet property="cityNameLabel" destination="4yU-aG-g6Y" id="kCQ-jH-N7g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKQ-ln-8mu" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="867" y="733"/>
         </scene>
     </scenes>
 </document>

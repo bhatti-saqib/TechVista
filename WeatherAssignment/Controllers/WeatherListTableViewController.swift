@@ -26,15 +26,18 @@ class WeatherListTableViewController: UITableViewController, AddWeatherDelegate 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let nav = segue.destination as? UINavigationController else {
-            fatalError("Navigation Controller not found")
+        if segue.identifier == "AddCities" {
+            guard let nav = segue.destination as? UINavigationController else {
+                fatalError("Navigation Controller not found")
+            }
+            
+            guard let addWeatherCityVC = nav.viewControllers.first as? AddCitiesViewController else {
+                fatalError("AddCitiesViewController not found")
+            }
+            
+            addWeatherCityVC.delegate = self
         }
         
-        guard let addWeatherCityVC = nav.viewControllers.first as? AddCitiesViewController else {
-            fatalError("AddCitiesViewController not found")
-        }
-        
-        addWeatherCityVC.delegate = self
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
