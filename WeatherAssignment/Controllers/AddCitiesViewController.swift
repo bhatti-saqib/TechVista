@@ -19,26 +19,33 @@ class AddCitiesViewController: UIViewController {
     var delegate: AddWeatherDelegate?
     
     @IBAction func saveBtnTapped(_ sender: UIButton) {
-        if var city = cityNamesTextField.text {
-            if(city.containsWhitespace) {
-                let urlNew = city.replacingOccurrences(of: " ", with: "%20")
-                city = urlNew
-            }
+        if var finalCity = cityNamesTextField.text {
+            let citiesArray = finalCity.components(separatedBy: ", ")
             
-            let weatherURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=imperial&appid=f1b281b9d22dbbbbfeab25b4e34bc6f0")!
-            
-            let weatherResource = Resource<WeatherViewModel>(url: weatherURL) { data in
+            for city in citiesArray {
+                if(city.containsWhitespace) {
+                    let urlNew = city.replacingOccurrences(of: " ", with: "%20")
+                    finalCity = urlNew
+                }
+                else {
+                    finalCity = city
+                }
                 
-                let weatherVM = try? JSONDecoder().decode(WeatherViewModel.self, from: data)
+                let weatherURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(finalCity)&units=imperial&appid=f1b281b9d22dbbbbfeab25b4e34bc6f0")!
                 
-                return weatherVM
-            }
-            
-            WebService().load(resource: weatherResource) { [weak self] result in
-                if let weatherVM = result {
-                    if let delegate = self?.delegate {
-                        delegate.addWeatherDidSave(vm: weatherVM)
-                        self?.dismiss(animated: true, completion: nil)
+                let weatherResource = Resource<WeatherViewModel>(url: weatherURL) { data in
+                    
+                    let weatherVM = try? JSONDecoder().decode(WeatherViewModel.self, from: data)
+                    
+                    return weatherVM
+                }
+                
+                WebService().load(resource: weatherResource) { [weak self] result in
+                    if let weatherVM = result {
+                        if let delegate = self?.delegate {
+                            delegate.addWeatherDidSave(vm: weatherVM)
+                            self?.dismiss(animated: true, completion: nil)
+                        }
                     }
                 }
             }
